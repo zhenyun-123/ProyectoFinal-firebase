@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "usuario-9a39e": {
+      "hosting": {
+        "firebase1": [
+          "usuario-9a39e"
+        ]
+      }
+    }
+  }
+}

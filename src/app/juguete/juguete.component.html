@@ -1,0 +1,60 @@
+<div style="text-align: center;">
+  <h2>sistema de tienda</h2>
+  <button type="button" class="btn btn-success"(click)="open(content)" >Crear nuevo producto</button>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Precio</th>                
+                <th>Opciones</th>
+                </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of collection.data | paginate: config">
+              <td>{{item.id}}</td>
+              <td>{{item.nombre}}</td>
+              <td>{{item.precio}}</td>
+              <td>
+                <button type="button" class="btn btn-primary"  (click)="openEditar(content,item)" >Editar</button>
+                <button type="button" class="btn btn-danger"  (click)="eliminar(item)">Eliminar</button>
+              </td>
+            </tr>
+          </tbody>
+    </table>
+    <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+    <ng-template #content let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">crear/updateProducto </h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <form [formGroup]="productoForm">
+              <div class="form-group">
+                <label>Id</label>
+                <input type="number" formControlName="id" class="form-control">
+              </div>
+              <div class="form-group">
+                <label>Nombre</label>
+                <input type="text" formControlName="nombre" class="form-control">
+              </div>
+              <div class="form-group">
+                <label>Precio</label>
+                <input type="text" formControlName="precio" class="form-control">
+              </div>
+            </form>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer"> 
+        
+        <button type="button" class="btn btn-outline-dark" (click)="actualizarProducto()" *ngIf="actualizar">Actualizar</button>
+        <button type="button" class="btn btn-primary" (click)="guardarProducto()" *ngIf="!actualizar" >Guardar</button>
+
+      </div>
+    </ng-template>
+  </div>
